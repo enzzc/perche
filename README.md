@@ -34,3 +34,10 @@ Les titres suivants s'afficheront à la suite. À tout moment, on peut :
 
  * sauvegarder le titre courant : `s` (insensible à la casse) ;
  * quitter proprement : `q` ou Ctrl+C (insensible ç la casse).
+
+## Compilation
+
+```console
+make build
+./bin/perché
+```
