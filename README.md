@@ -33,7 +33,7 @@ Year:   2011
 Les titres suivants s'afficheront à la suite. À tout moment, on peut :
 
  * sauvegarder le titre courant : `s` (insensible à la casse) ;
- * quitter proprement : `q` ou Ctrl+C (insensible ç la casse).
+ * quitter proprement : `q` ou Ctrl+C (insensible à la casse).
 
 ## Compilation
 
