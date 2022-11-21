@@ -18,7 +18,9 @@ de diffusion, par simple pression de la touche `s`.
  * choix du lecteur sous-jacent : actuellement `mpv` est requis et est la seule
    option ;
  * choix du fichier pour les titres sauvegardés : actuellement c'est
-   `~/.fip-tracks.txt` seulement.
+   `~/.fip-tracks.txt` seulement ;
+ * possibilité de sauvegarder aussi le titre qui a été diffusé avant ;
+ * intégration ActivityPub pour partager un titre qu'on aime, grâce à l'*activity* [`Listen`](https://www.w3.org/TR/activitystreams-vocabulary/#dfn-listen).
 
 ## Utilisation
 
