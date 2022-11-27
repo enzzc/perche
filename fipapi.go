@@ -24,6 +24,13 @@ type RadioFranceStatus struct {
 	} `json:"now"`
 }
 
+func minDuration(d1, d2 time.Duration) time.Duration {
+	if d1 < d2 {
+		return d1
+	}
+	return d2
+}
+
 func MonitorAPI() chan *RadioFranceStatus {
 	ch := make(chan *RadioFranceStatus)
 	go func() {
@@ -45,7 +52,7 @@ func MonitorAPI() chan *RadioFranceStatus {
 			var status RadioFranceStatus
 			decoder.Decode(&status)
 			ch <- &status
-			time.Sleep(time.Duration(status.DelayToRefresh) * time.Millisecond)
+			time.Sleep(minDuration(10*time.Second, time.Duration(status.DelayToRefresh)*time.Millisecond))
 		}
 	}()
 	return ch
