@@ -33,33 +33,21 @@ func main() {
 		mpv.Close()
 	}()
 
-	mpv.Play(FipStreamURL)
+	//mpv.Play(FipStreamURL)
 
-	keyboardNotif := CaptureKeyboardEvents()
+	tuiChans := RunTUI(ctx)
 	statusNotif := MonitorAPI()
 
-	var lastCurrentTrack *RadioFranceStatus
 	for {
 		select {
 		case <-sigs:
 			fmt.Println("Bye.")
 			return
-		case k := <-keyboardNotif:
-			if k == KeyboardEventExit {
-				fmt.Println("Bye.")
-				return
-			} else if k == KeyboardEventSaveCurrent {
-				go func() {
-					SaveTrack(lastCurrentTrack) // FIXME: possible data race (see below)
-					fmt.Println("Track saved.")
-				}()
-			}
+		case <-tuiChans.ExitNotif:
+			fmt.Println("TUI returned. Bye.")
+			return
 		case s := <-statusNotif:
-			lastCurrentTrack = s // FIXME: possible data race (see above)
-			fmt.Println("---")
-			fmt.Println("Title: ", s.Now.Song.Title)
-			fmt.Println("Artist:", s.Now.Artist)
-			fmt.Println("Year:  ", s.Now.Song.Year)
+			tuiChans.Statuses <- s
 		}
 	}
 }
